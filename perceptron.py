@@ -58,13 +58,13 @@ class Perceptron:
         output = (np.dot(inputs, self.weights)) + self.bias
         return output
 
-    def improve_weights(self, output, error):
+    def improve_weights(self, training_sample, error):
         if not error:
             return
 
-        output = self.get_as_list(output)
+        training_sample = self.get_as_list(training_sample)
         for index, value in enumerate(self.weights):
-            delta = error * output[index] * self.learning_rate
+            delta = error * training_sample[index] * self.learning_rate
 
             self.weights[index] += delta
 
