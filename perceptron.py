@@ -8,7 +8,7 @@ class Perceptron:
         self.target = ru
         self.bias = bias
         self.learning_rate = learning_rate
-        self.weights = [1 for i in range(len(str(self.target)))]
+        self.weights = [1 for digit in range(len(str(self.target)))]
         self.training_data = None
 
     @staticmethod
@@ -31,9 +31,6 @@ class Perceptron:
     @staticmethod
     def get_lowest_and_highest_numbers(number):
         number_digits = len(str(number))
-
-        if number_digits <= 0:
-            raise ValueError("Number of digits must be positive")
 
         lowest_number = 10 ** (number_digits - 1)
         highest_number = (10 ** number_digits) - 1
@@ -89,12 +86,12 @@ class Perceptron:
 
                 error_per_epoch.append(error)
 
-            global_error = np.mean([i ** 2 for i in error_per_epoch])
+            global_error = np.mean([error_value ** 2 for error_value in error_per_epoch])
             print(f"Erro global por época: {global_error}")
 
             if early_callback:
                 if global_error <= early_callback:
-                    print(f"Última epóca treinada: {epoch}")
+                    print(f"Última época treinada: {epoch}")
                     break
 
     def test(self, test_data=None, detailed=False):
